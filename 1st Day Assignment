@@ -1,0 +1,7 @@
+
+
+1. Use official shell script to install and configure Docker on your control machine.
+
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt-get update
