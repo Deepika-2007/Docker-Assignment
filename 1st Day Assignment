@@ -1,7 +1,76 @@
 
 
-1. Use official shell script to install and configure Docker on your control machine.
+# Use official shell script to install and configure Docker on your control machine.
 
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-apt-get update
+
+sudo apt-get update
+
+apt-cache policy docker-ce
+
+sudo apt-get install -y docker-ce
+
+
+
+
+# Start Docker service and check status of the same.
+
+ systemctl start  docker
+ systemctl status docker
+
+
+# Display Docker version.
+
+docker version ( show client and server details)
+
+
+
+# Configure non root user to run docker commands without sudo.
+
+sudo usermod -aG docker teena
+su - teena
+id -nG
+Now run docker command without sudo 
+
+
+
+# Type docker on commandline and read output i.e containing related commands.
+
+Type docker and give options, Mangement commands and Basic commands.
+
+
+
+# Display System information using Docker.
+
+teena@priyanka-HP-EliteBook-Folio-9470m:~$ docker inspect f975c5035748
+[
+    {
+        "Id": "sha256:f975c50357489439eb9145dbfa16bb7cd06c02c31aa4df45c77de4d2baa4e232",
+        "RepoTags": [
+            "ubuntu:latest"
+        ],
+        "RepoDigests": [
+            "ubuntu@sha256:e348fbbea0e0a0e73ab0370de151e7800684445c509d46195aef73e090a49bd6"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2018-03-06T22:17:26.531075062Z",
+        "Container": "6e8eb576ec0f7564a85c0fbd39824e0e91c031aa0019c56c5f992449e88d1142",
+        "ContainerConfig": {
+            "Hostname": "6e8eb576ec0f",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            
+            
+            
+#  Check whether you can access/download images from DockerHub or not.
+
+teena@priyanka-HP-EliteBook-Folio-9470m:~$ docker pull debian
+Using default tag: latest
+latest: Pulling from library/debian
+c73ab1c6897b: Pull complete 
+Digest: sha256:c908a4fcb2b2a1953bd40ebc12d9a4116868d72540efc27502ee6c2395b8a1e9
+Status: Downloaded newer image for debian:latest
