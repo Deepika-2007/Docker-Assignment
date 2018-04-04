@@ -120,7 +120,7 @@ alpine              latest              3fd9065eaf02        2 months ago        
 alpine              3.6                 77144d8c6bdc        2 months ago        3.97MB
 hello-world         latest              f2a91732366c        4 months ago        1.85kB
 
-teena@priyanka-HP-EliteBook-Folio-9470m:~$ docker rmi 77144d8c6bdc
+teena@priyanka-HP-EliteBook-Folio-9470m:~$ docker rmi 77144d8c6bdc ( Image id )
 Untagged: alpine:3.6
 Untagged: alpine@sha256:3d44fa76c2c83ed9296e4508b436ff583397cac0f4bad85c2b4ecc193ddb5106
 Deleted: sha256:77144d8c6bdce9b97b6d5a900f1ab85da325fe8a0d1b0ba0bbff2609befa2dda
