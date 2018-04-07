@@ -1,0 +1,15 @@
+# Pull nginx image from dockerhub.
+
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker pull nginx
+Using default tag: latest
+latest: Pulling from library/nginx
+2a72cbf407d6: Pull complete 
+e19f9e910af9: Pull complete 
+2f3d26a87e79: Pull complete 
+Digest: sha256:e36d7f5dabf1429d84135bb8a8086908e1150f1a178c75719a9e0e53ebb90353
+Status: Downloaded newer image for nginx:latest
+
+
+# Run a container from nginx image and map container port 80 to system port 80.
+
