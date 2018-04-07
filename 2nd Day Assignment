@@ -206,6 +206,118 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 # Inspect already downloaded "alpine" docker image using docker inspect command.
 
 
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker inspect 3fd9065eaf02
+[
+    {
+        "Id": "sha256:3fd9065eaf02feaf94d68376da52541925650b81698c53c6824d92ff63f98353",
+        "RepoTags": [
+            "alpine:latest"
+        ],
+        "RepoDigests": [
+            "alpine@sha256:7df6db5aa61ae9480f52f0b3a06a140ab98d427f86d8d5de0bedab9b8df6b1c0"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2018-01-09T21:10:58.579708634Z",
+        "Container": "30e1a2427aa2325727a092488d304505780501585a6ccf5a6a53c4d83a826101",
+        "ContainerConfig": {
+            "Hostname": "30e1a2427aa2",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "CMD [\"/bin/sh\"]"
+            ],
+            "ArgsEscaped": true,
+            "Image": "sha256:fbef17698ac8605733924d5662f0cbfc0b27a51e83ab7d7a4b8d8a9a9fe0d1c2",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "DockerVersion": "17.06.2-ce",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/bin/sh"
+            ],
+            "ArgsEscaped": true,
+            "Image": "sha256:fbef17698ac8605733924d5662f0cbfc0b27a51e83ab7d7a4b8d8a9a9fe0d1c2",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 4147781,
+        "VirtualSize": 4147781,
+        "GraphDriver": {
+            "Data": {
+                "MergedDir": "/var/lib/docker/overlay2/361972687d3099a659bf6d46f53c3b7ad5cb12b6d5bc45c5ea440c956b57bb8d/merged",
+                "UpperDir": "/var/lib/docker/overlay2/361972687d3099a659bf6d46f53c3b7ad5cb12b6d5bc45c5ea440c956b57bb8d/diff",
+                "WorkDir": "/var/lib/docker/overlay2/361972687d3099a659bf6d46f53c3b7ad5cb12b6d5bc45c5ea440c956b57bb8d/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:cd7100a72410606589a54b932cabd804a17f9ae5b42a1882bd56d263e02b6215"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+
+# Tag your local "alpine" image with name "myimage" along with version 1.0 :-
+
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              latest              f975c5035748        4 weeks ago         112MB
+alpine              latest              3fd9065eaf02        2 months ago        4.15MB
+hello-world         latest              f2a91732366c        4 months ago        1.85kB
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker tag 3fd9065eaf02 myimage:1.0
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              latest              f975c5035748        4 weeks ago         112MB
+alpine              latest              3fd9065eaf02        2 months ago        4.15MB
+myimage             1.0                 3fd9065eaf02        2 months ago        4.15MB
+hello-world         latest              f2a91732366c        4 months ago        1.85kB
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ 
+
+
+
+
+
 
 
 
