@@ -139,6 +139,75 @@ docker run -it alpine /bin/sh
 / # 
 
 
+# Run command inside container: echo "hello world" > hello.txt ls
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker run -d -it alpine /bin/sh
+45ab21cb6bfc765bc145b30a9cf5594d3907aa4c670498392daea478bc53f400
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+45ab21cb6bfc        alpine              "/bin/sh"           9 seconds ago       Up 8 seconds                            modest_northcutt
+ 
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker exec -it 45ab21cb6bfc /bin/sh
+/ # echo "hello world" > hello.txt
+/ # cat hello.txt 
+hello world
+/ # 
+
+
+# Take exit from same container without killing the container.
+
+type ctrl P+Q in terminal
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker exec -it 45ab21cb6bfc /bin/sh
+/ # echo "hello world" > hello.txt
+/ # cat hello.txt 
+hello world      ( after that press ctrl P+Q in terminal)
+/ # read escape sequence
+
+# Run another container using below command and check if you can find hello.txt within this container. You should find container isolations from step 3-5. docker container run alpine ls
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker run -d -it alpine /bin/sh
+09c5bc65a3b5accd9bee62fea60bc5229b9e887efca93ebd262003f716f238e4
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+09c5bc65a3b5        alpine              "/bin/sh"           21 seconds ago      Up 20 seconds                           flamboyant_boyd
+45ab21cb6bfc        alpine              "/bin/sh"           About an hour ago   Up About an hour                        modest_northcutt
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker exec -it 09c5bc65a3b5 /bin/sh
+/ # echo "hello world" > hello.txt
+/ # read escape sequence
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+09c5bc65a3b5        alpine              "/bin/sh"           4 minutes ago       Up 4 minutes                            flamboyant_boyd
+45ab21cb6bfc        alpine              "/bin/sh"           About an hour ago   Up About an hour                        modest_northcutt
+
+
+# Stop a container using Container ID.
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker stop 09c5bc65a3b5
+09c5bc65a3b5
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+45ab21cb6bfc        alpine              "/bin/sh"           About an hour ago   Up About an hour                        modest_northcutt
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                        PORTS               NAMES
+09c5bc65a3b5        alpine              "/bin/sh"           5 minutes ago       Exited (137) 10 seconds ago                       flamboyant_boyd
+
+
+# Start same container using ID and exec a command "echo 'hello world!'" in docker container without instantiating a new container.
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker start 09c5bc65a3b5
+09c5bc65a3b5
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+09c5bc65a3b5        alpine              "/bin/sh"           7 minutes ago       Up 3 seconds                            flamboyant_boyd
+45ab21cb6bfc        alpine              "/bin/sh"           About an hour ago   Up About an hour                        modest_northcutt
+
+# Inspect already downloaded "alpine" docker image using docker inspect command.
+
+
+
+
 
 
 
