@@ -94,8 +94,19 @@ DRIVER              VOLUME NAME
 local               445b86b4de74084e92514d9568453e74e17ffbe56e257dbc253900c3c1687d51
 local               dbvol
 
+# Create another docker volume named "testvol"
 
+docker volume create testvol
+testvol
 
+# Remove docker volume "testvol"
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker volume rm testvol
+testvol
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker volume ls
+DRIVER              VOLUME NAME
+local               dbvol
 
 
 
