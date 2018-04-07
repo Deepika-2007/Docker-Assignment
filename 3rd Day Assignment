@@ -11,5 +11,95 @@ Digest: sha256:e36d7f5dabf1429d84135bb8a8086908e1150f1a178c75719a9e0e53ebb90353
 Status: Downloaded newer image for nginx:latest
 
 
-# Run a container from nginx image and map container port 80 to system port 80.
+# Run a container from nginx image and map container port 80 to system port 80.Now hit IP 172.17.0.5 and show page of nginx
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker run -d -it --name mynginx -p 80:67 nginx
+9b598103df82873942645c32e1fa27de8c0ced0f89f59a8368e078039778241c
+
+
+# Display all mapped ports on nginx image.  
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                        NAMES
+9b598103df82        nginx               "nginx -g 'daemon of…"   12 seconds ago      Up 10 seconds       80/tcp, 0.0.0.0:80->67/tcp   mynginx
+09c5bc65a3b5        alpine              "/bin/sh"                2 hours ago         Up About an hour                                 flamboyant_boyd
+45ab21cb6bfc        alpine              "/bin/sh"                3 hours ago         Up 3 hours                                       modest_northcutt
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ 
+
+
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker run -d -it --name containexpose --expose=80 nginx 
+cd7c97c094fb2d4ae1f87fe503680d951351e6f9dce39e720e5556fe8b32677c
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                        NAMES
+cd7c97c094fb        nginx               "nginx -g 'daemon of…"   7 seconds ago       Up 5 seconds        80/tcp                       containexpose
+
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker inspect cd7c97c094fb | grep -i IPAddress
+            "SecondaryIPAddresses": null,
+            "IPAddress": "172.17.0.5",
+                    "IPAddress": "172.17.0.5",
+
+
+Now hit IP 172.17.0.5 and show page of nginx
+
+
+# Create docker volume named "dbvol"
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker volume create dbvol
+dbvol
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker volume ls
+DRIVER              VOLUME NAME
+local               dbvol
+
+# Run docker container from wordpress image and mount "dbvol" to /var/lib/mysql
+
+sudo docker run -d -it --name wordPvolume -v /var/lib/docker/volumes/dbvol://var/lib/mysql wordpress
+
+[sudo] password for priyanka: 
+Unable to find image 'wordpress:latest' locally
+latest: Pulling from library/wordpress
+2a72cbf407d6: Already exists 
+273cd543cb15: Pull complete 
+ec5ac8875de7: Pull complete 
+9106e19b56c1: Pull complete 
+ee2f70ac7c7d: Pull complete 
+7257ad6985e8: Pull complete 
+18f5c2055da2: Pull complete 
+85293a6fdd80: Pull complete 
+9e797eeb0c14: Pull complete 
+f16178842884: Pull complete 
+13899c06d3f8: Pull complete 
+70c27fe4c3c5: Pull complete 
+d32c8ad2d9d7: Pull complete 
+07fe445494e6: Pull complete 
+63b8de7b32fe: Pull complete 
+e4b721952e22: Pull complete 
+d9ede6dd6f74: Pull complete 
+0af4f74bfd92: Pull complete 
+66539d6f3761: Pull complete 
+6c70fbc96d4b: Pull complete 
+Digest: sha256:5362008b461dc106736b0bb39f339956139da9f6b29d1f7921ffdfef93e54291
+Status: Downloaded newer image for wordpress:latest
+c66bd5fe3a79abe27ed2eb6bd9d5a14b945b54be158f511dfc09fcd339b1e3f8
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                        NAMES
+c66bd5fe3a79        wordpress           "docker-entrypoint.s…"   8 seconds ago       Up 6 seconds        80/tcp                       wordPvolu
+
+# Display all docker volumes.
+
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker volume ls
+DRIVER              VOLUME NAME
+local               445b86b4de74084e92514d9568453e74e17ffbe56e257dbc253900c3c1687d51
+local               dbvol
+
+
+
+
+
+
+
+
+
 
