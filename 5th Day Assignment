@@ -1,0 +1,133 @@
+# Signup on dockerhub.
+Login on dockerhub and create a repository by providing repo name "mytestrepo" and a little description about the same.
+
+Login on dockerhub and create a repository and provide name "mytestrepo" and give public permission.
+
+# Search for "centos" image on docker using commandline.
+
+docker search centos
+NAME                               DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
+centos                             The official build of CentOS.                   4175                [OK]                
+ansible/centos7-ansible            Ansible on Centos7                              108                                     [OK]
+jdeathe/centos-ssh                 CentOS-6 6.9 x86_64 / CentOS-7 7.4.1708 x86_…   93                                      [OK]
+consol/centos-xfce-vnc             Centos container with "headless" VNC session…   52                                      [OK]
+imagine10255/centos6-lnmp-php56    centos6-lnmp-php56                              40                                      [OK]
+tutum/centos                       Simple CentOS docker image with SSH access      37                                      
+gluster/gluster-centos             Official GlusterFS Image [ CentOS-7 +  Glust…   26                                      [OK]
+centos/mysql-57-centos7            MySQL 5.7 SQL database server                   23                                      
+openshift/base-centos7             A Centos7 derived base image for Source-To-I…   22                                      
+kinogmt/centos-ssh                 CentOS with SSH                                 19                                      [OK]
+centos/python-35-centos7           Platform for building and running Python 3.5…   19                                      
+centos/postgresql-96-centos7       PostgreSQL is an advanced Object-Relational …   12                                      
+openshift/jenkins-2-centos7        A Centos7 based Jenkins v2.x image for use w…   11                                      
+openshift/mysql-55-centos7         DEPRECATED: A Centos7 based MySQL v5.5 image…   6                                       
+pivotaldata/centos-gpdb-dev        CentOS image for GPDB development. Tag names…   3                                       
+openshift/jenkins-1-centos7        DEPRECATED: A Centos7 based Jenkins v1.x ima…   3                                       
+openshift/wildfly-101-centos7      A Centos7 based WildFly v10.1 image for use …   3                                       
+pivotaldata/centos-mingw           Using the mingw toolchain to cross-compile t…   1                                       
+blacklabelops/centos               CentOS Base Image! Built and Updates Daily!     1                                       [OK]
+openshift/php-55-centos7           DEPRECATED: A Centos7 based PHP v5.5 image f…   1                                       
+pivotaldata/centos                 Base centos, freshened up a little with a Do…   1                                       
+openshift/wildfly-81-centos7       A Centos7 based WildFly v8.1 image for use w…   1                                       
+jameseckersall/sonarr-centos       Sonarr on CentOS 7                              0                                       [OK]
+pivotaldata/centos-gcc-toolchain   CentOS with a toolchain, but unaffiliated wi…   0                                       
+smartentry/centos                  centos with smartentry                          0                                       [OK]
+
+# Limit out search result to 10 entries only.docker search --limit 10 centos
+
+NAME                          DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
+centos                        The official build of CentOS.                   4175                [OK]                
+ansible/centos7-ansible       Ansible on Centos7                              108                                     [OK]
+jdeathe/centos-ssh            CentOS-6 6.9 x86_64 / CentOS-7 7.4.1708 x86_…   93                                      [OK]
+openshift/base-centos7        A Centos7 derived base image for Source-To-I…   22                                      
+kinogmt/centos-ssh            CentOS with SSH                                 19                                      [OK]
+openshift/jenkins-2-centos7   A Centos7 based Jenkins v2.x image for use w…   11                                      
+pivotaldata/centos-gpdb-dev   CentOS image for GPDB development. Tag names…   3                                       
+pivotaldata/centos            Base centos, freshened up a little with a Do…   1                                       
+pivotaldata/centos-mingw      Using the mingw toolchain to cross-compile t…   1                                       
+smartentry/centos             centos with smartentry 
+
+ docker search --limit 10 centos | wc -l
+11
+
+# Apply a filter on search result to show entries for images having 3 stars.
+
+docker search centos --filter "stars=3"
+
+NAME                              DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
+centos                            The official build of CentOS.                   4175                [OK]                
+ansible/centos7-ansible           Ansible on Centos7                              108                                     [OK]
+jdeathe/centos-ssh                CentOS-6 6.9 x86_64 / CentOS-7 7.4.1708 x86_…   93                                      [OK]
+consol/centos-xfce-vnc            Centos container with "headless" VNC session…   52                                      [OK]
+imagine10255/centos6-lnmp-php56   centos6-lnmp-php56                              40                                      [OK]
+tutum/centos                      Simple CentOS docker image with SSH access      37                                      
+gluster/gluster-centos            Official GlusterFS Image [ CentOS-7 +  Glust…   26                                      [OK]
+centos/mysql-57-centos7           MySQL 5.7 SQL database server                   23                                      
+openshift/base-centos7            A Centos7 derived base image for Source-To-I…   22                                      
+kinogmt/centos-ssh                CentOS with SSH                                 19                                      [OK]
+centos/python-35-centos7          Platform for building and running Python 3.5…   19                                      
+centos/postgresql-96-centos7      PostgreSQL is an advanced Object-Relational …   12                                      
+openshift/jenkins-2-centos7       A Centos7 based Jenkins v2.x image for use w…   11                                      
+openshift/mysql-55-centos7        DEPRECATED: A Centos7 based MySQL v5.5 image…   6                                       
+pivotaldata/centos-gpdb-dev       CentOS image for GPDB development. Tag names…   3                                       
+openshift/wildfly-101-centos7     A Centos7 based WildFly v10.1 image for use …   3                                       
+openshift/jenkins-1-centos7       DEPRECATED: A Centos7 based Jenkins v1.x ima…   3                                       
+
+
+# Format the search result to get output containing only name,description and is_official values.
+
+
+docker search --format "table {{.Name}}\t{{.IsOfficial}}\t{{.Description}}" nginx
+NAME                                                   OFFICIAL            DESCRIPTION
+nginx                                                  [OK]                Official build of Nginx.
+jwilder/nginx-proxy                                                        Automated Nginx reverse proxy for docker con…
+richarvey/nginx-php-fpm                                                    Container running Nginx + PHP-FPM capable of…
+jrcs/letsencrypt-nginx-proxy-companion                                     LetsEncrypt container to use with nginx as p…
+kong                                                   [OK]                Open-source Microservice & API Management la…
+webdevops/php-nginx                                                        Nginx with PHP-FPM
+kitematic/hello-world-nginx                                                A light-weight nginx container that demonstr…
+zabbix/zabbix-web-nginx-mysql                                              Zabbix frontend based on Nginx web-server wi…
+bitnami/nginx                                                              Bitnami nginx Docker Image
+linuxserver/nginx                                                          An Nginx container, brought to you by LinuxS…
+1and1internet/ubuntu-16-nginx-php-phpmyadmin-mysql-5                       ubuntu-16-nginx-php-phpmyadmin-mysql-5
+tobi312/rpi-nginx                                                          NGINX on Raspberry Pi / armhf
+nginxdemos/nginx-ingress                                                   NGINX Ingress Controller for Kubernetes
+wodby/drupal-nginx                                                         Nginx for Drupal container image
+webdevops/nginx                                                            Nginx container
+blacklabelops/nginx                                                        Dockerized Nginx Reverse Proxy Server.
+centos/nginx-18-centos7                                                    Platform for running nginx 1.8 or building n…
+nginxdemos/hello                                                           NGINX webserver that serves a simple page co…
+1science/nginx                                                             Nginx Docker images that include Consul Temp…
+centos/nginx-112-centos7                                                   Platform for running nginx 1.12 or building …
+pebbletech/nginx-proxy                                                     nginx-proxy sets up a container running ngin…
+behance/docker-nginx                                                       Provides base OS, patches and stable nginx f…
+toccoag/openshift-nginx                                                    Nginx reverse proxy for Nice running on same…
+travix/nginx                                                               NGinx reverse proxy
+mailu/nginx                                                                Mailu nginx frontend
+
+
+
+# Pull an image named "centos" from dockerhub.
+
+docker pull centos
+Using default tag: latest
+latest: Pulling from library/centos
+469cfcc7a4b3: Pull complete 
+Digest: sha256:bc494daa9d9ad7e37f93236fbd2c3f372739997c6336ef3c321e227f336e73d3
+Status: Downloaded newer image for centos:latest
+
+# Tag "centos" image with name "mycentos" in your repository with version 1.1
+
+
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker tag e934aafc2206 mycentos:v1.1
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+priyanka            docker-web          7db880351f6b        2 hours ago         439MB
+hello               v0.1                fc08c1f175bb        4 hours ago         50.2MB
+mycentos            v1.1                e934aafc2206        2 days ago          199MB
+centos              latest              e934aafc2206        2 days ago          199MB
+
+
+
+# Push that image to your repo "mytestrepo" on your dockerhub.
