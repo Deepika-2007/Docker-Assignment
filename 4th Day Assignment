@@ -1,0 +1,81 @@
+
+# Create a file named index.js with below content.
+
+index.js
+
+var os = require("os"); var hostname = os.hostname(); console.log("hello from " + hostname);
+
+    Create a file named Dockerfile and write code as per the steps mentioned.
+
+    Use alpine image.
+    Add Author/Maintainer name in DockerFile
+    run commands -> apk update & apk add nodejs
+    copy current directory to /app
+    change your working directory to /app
+    specify the default command to be run upon container creation as mentioned below. node index.js
+
+    Build image from Dockerfile.
+    Tag image with name "hello:v0.1"
+
+
+
+cat index.js 
+var os = require("os"); var hostname = os.hostname(); console.log("hello from " + hostname);
+root@priyanka-HP-EliteBook-Folio-9470m:~# 
+
+
+
+root@priyanka-HP-EliteBook-Folio-9470m:~# cat Dockerfile 
+FROM alpine
+MAINTAINER priyanka sharma
+RUN apk update
+RUN apk add nodejs
+COPY index.js /app/index.js
+WORKDIR /app
+CMD node index.js
+
+
+
+
+docker build -t hello:v0.1 .
+Sending build context to Docker daemon  70.14kB
+Step 1/7 : FROM alpine
+ ---> 3fd9065eaf02
+Step 2/7 : MAINTAINER priyanka sharma
+ ---> Using cache
+ ---> 112051e6e6a5
+Step 3/7 : RUN apk update
+ ---> Using cache
+ ---> 319fae844bc7
+Step 4/7 : RUN apk add nodejs
+ ---> Using cache
+ ---> b36fac1280a7
+Step 5/7 : COPY index.js /app/index.js
+ ---> Using cache
+ ---> 7465c8a09e98
+Step 6/7 : WORKDIR /app
+ ---> Using cache
+ ---> 6749fc9c6a95
+Step 7/7 : CMD node index.js
+ ---> Using cache
+ ---> fc08c1f175bb
+Successfully built fc08c1f175bb
+Successfully tagged hello:v0.1
+
+root@priyanka-HP-EliteBook-Folio-9470m:~# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+hello               v0.1                fc08c1f175bb        26 minutes ago      50.2MB
+
+
+root@priyanka-HP-EliteBook-Folio-9470m:~# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+6d5b4a1ca4e3        fc08c1f175bb        "/bin/sh"           22 minutes ago      Up 22 minutes                           dockerfile
+
+root@priyanka-HP-EliteBook-Folio-9470m:~# docker exec -it 6d5b4a1ca4e3 /bin/sh
+/app # ls
+index.js
+/app # cat index.js 
+var os = require("os"); var hostname = os.hostname(); console.log("hello from " + hostname);
+/app # node index.js 
+hello from 6d5b4a1ca4e3
+/app # 
