@@ -79,3 +79,83 @@ var os = require("os"); var hostname = os.hostname(); console.log("hello from " 
 /app # node index.js 
 hello from 6d5b4a1ca4e3
 /app # 
+
+
+
+# Assignment 2
+
+    Create a DockerFile.
+
+    Use Ubuntu latest image.
+
+    Add your name as a Manintainer.
+
+    Update local packages using command (apt-get update).
+
+    Install nodejs package.
+
+    Install npm package.
+
+    Create a symlink using command (ln -s /usr/bin/nodejs /usr/bin/node).
+
+    Trigger a command (npm install -g http-server)
+
+    Add any test index.html file from local at /usr/apps/hello-docker/index.html on container.
+
+    change your working directory to /usr/apps/hello-docker/.
+
+    Run a command (http-server -s) on every container initialization.
+
+    Build your dockerfile and tag it with "yourname:docker-web"
+
+    Run a docker container from the image that you have just created and map container 8080 port to host 8080 port.(8080:8080)
+
+    Try accessing your webpage using "http://<virtualmachine_ipaddress>:8080/index.html" URL.
+
+    Delete docker container and image from local.
+    
+  
+  
+    docker build -t priyanka:docker-web .
+Sending build context to Docker daemon  74.24kB
+Step 1/9 : FROM ubuntu
+ ---> f975c5035748
+Step 2/9 : MAINTAINER priyanka sharma
+ ---> Using cache
+ ---> 96cc28ed30f5
+Step 3/9 : RUN apt-get update -y
+ ---> Using cache
+ ---> 3e782561261d
+Step 4/9 : RUN apt-get install nodejs -y
+ ---> Using cache
+ ---> dd8658a79189
+Step 5/9 : RUN apt-get install npm -y
+ ---> Using cache
+ ---> 51719bf887f0
+Step 6/9 : CMD ln -s /usr/bin/nodejs /usr/bin/node
+ ---> Using cache
+ ---> 0c1ec27ab73f
+Step 7/9 : CMD npm install -g http-server
+ ---> Using cache
+ ---> 37a897ee97b1
+Step 8/9 : ADD test/index.html /usr/apps/hello-docker/index.html
+ ---> Using cache
+ ---> dc39721ec265
+Step 9/9 : WORKDIR /usr/apps/hello-docker/
+ ---> Using cache
+ ---> 7db880351f6b
+Successfully built 7db880351f6b
+Successfully tagged priyanka:docker-web
+root@priyanka-HP-EliteBook-Folio-9470m:~# 
+
+    
+docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+priyanka            docker-web          7db880351f6b        About an hour ago   439MB
+
+    
+    
+    
+    
+
+
