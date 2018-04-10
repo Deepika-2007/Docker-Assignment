@@ -177,4 +177,12 @@ The push refers to repository [docker.io/priyanka13/mytestrep]
 43e653f84b79: Mounted from library/centos 
 v1.1: digest: sha256:191c883e479a7da2362b2d54c0840b2e8981e5ab62e11ab925abf8808d3d5d44 size: 529
 
+# Do commandline logout on dockerhub. :-
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$  docker logout
+Removing login credentials for https://index.docker.io/v1/
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ 
+
+
+
 
