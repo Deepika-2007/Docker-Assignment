@@ -5,26 +5,24 @@ priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker run -d -it --name nginx01 n
 
 # Set the hostname of container: "nginx.example.com"
 
-
  docker run -d -it --name nginx -h nginx.example.com nginx /bin/bash
 151a90fc6480310bfc574a0145834be5eef726291bcaec04d5e4f92ba59bc3ff
+
 priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker ps 
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 151a90fc6480        nginx               "/bin/bash"         25 seconds ago      Up 23 seconds       80/tcp              nginx
 5cd1b12b015a        nginx               "/bin/bash"         2 minutes ago       Up 2 minutes        80/tcp              nginx01
+
 priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker exec -it 151a90fc6480 /bin/bash
 root@nginx:/# hostname
 nginx.example.com
 root@nginx:/# 
 
 
-
 priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker ps 
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 5cd1b12b015a        nginx               "/bin/bash"         10 seconds ago      Up 8 seconds        80/tcp              nginx01
 priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ 
-
-
 
 Set environment variables
 
