@@ -87,3 +87,6 @@ priyanka@priyanka-HP-EliteBook-Folio-9470m:~$
 
 docker run -it -w /webroot nginx /bin/bash
 root@fca4e004a4b8:/webroot# ls
+
+
+
