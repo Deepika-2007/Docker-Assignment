@@ -18,6 +18,36 @@ root@nginx:/# hostname
 nginx.example.com
 root@nginx:/# 
 
+# Assign memory
+
+    soft limit: 200 MB
+    hard limit: 400 MB
+    
+ docker run -d -it --memory=400M --memory-reservation=4M nginx /bin/bash
+b9059eaa4b09a755a87fa051ca1c256e1758bf111b24d5a2c482b7f53a552c7e
+
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+b9059eaa4b09        nginx               "/bin/bash"         8 seconds ago       Up 6 seconds        80/tcp              sharp_heyrovsky
+dc0bfaf1f72f        ubuntu              "/bin/bash"         4 minutes ago       Up 4 minutes                            clever_saha
+
+ docker inspect b9059eaa4b09 | grep Memory
+            "Memory": 419430400,
+            "KernelMemory": 0,
+            "MemoryReservation": 4194304,
+            "MemorySwap": 838860800,
+            "MemorySwappiness": null,
+
+
+# Assign CPU
+    cpu-share: 200
+
+docker run -it --cpu-shares="200" ubuntu /bin/bash
+ 
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker inspect dc0bfaf1f72f | grep 200
+            "CpuShares": 200,
+                "LowerDir": "/var/lib/docker/overlay2/942334dae2ec4194e771fb614558e7bd6a5442eecff593d8629ba0436cb81db9-init/diff:/var/lib/docker/overlay2/3eb8f7b6b13b0b774725376381d44fdb5a6203268f3339f5f841b46379421135/diff:/var/lib/docker/overlay2/f2c11b4b7a14b08f42927673f7eb7a26a65d933bff8b553cde4d0dad9318fbfc/diff:/var/lib/docker/overlay2/a0f854787755d105111ee529710209feb735f0695b1273e04dab4dba3f8ec80a/diff:/var/lib/docker/overlay2/0f8e95405f9a0d9ae2a2b9c35464951f8220428f20089faff227175201a805f4/diff:/var/lib/docker/overlay2/9d7695a656e1482b621594a56cee3681aa9029900d8121c6bccc1360c9e7c498/diff",
+
 
 priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker ps 
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
