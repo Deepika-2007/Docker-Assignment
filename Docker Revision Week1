@@ -89,4 +89,44 @@ docker run -it -w /webroot nginx /bin/bash
 root@fca4e004a4b8:/webroot# ls
 
 
+# Docker Inspection
+
+  #  Run a jenkins container and inspect the following info 
+  
+    IP Address
+    Mac Address
+    Hostname
+    Container Name
+    Ports
+    Environment Variables
+    Start time
+
+
+docker inspect e3637c23f179 | grep IPAddress
+            "SecondaryIPAddresses": null,
+            "IPAddress": "172.17.0.4",
+                    "IPAddress": "172.17.0.4",
+
+ docker inspect e3637c23f179 | grep MacAddress
+            "MacAddress": "02:42:ac:11:00:04",
+                    "MacAddress": "02:42:ac:11:00:04",
+
+docker inspect e3637c23f179 | grep Hostname
+        "HostnamePath": "/var/lib/docker/containers/e3637c23f179c01494cb062f525f61fd9d295495fe326ea9ccaf198d22b0e79b/hostname",
+            "Hostname": "e3637c23f179",
+            
+docker inspect e3637c23f179 | grep Name
+        "Name": "/jenkins",       
+            
+docker inspect 03b12168ba71 | grep StartedAt
+            "StartedAt": "2018-04-14T18:44:56.916771029Z",
+            
+            
+            
+            
+            
+            
+            
+
+
 
