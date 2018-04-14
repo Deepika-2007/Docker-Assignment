@@ -24,7 +24,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 5cd1b12b015a        nginx               "/bin/bash"         10 seconds ago      Up 8 seconds        80/tcp              nginx01
 priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ 
 
-Set environment variables
+# Set environment variables
 
     NAME: $(yourname)
     ORG: Opstree
@@ -38,4 +38,22 @@ root@39d1f31341b4:/# echo $TEAM
 Bootcamp
 
 
-Set above defined variables from a file
+# Set above defined variables from a file
+
+ docker run --env-file env.list ubuntu env | grep NAME
+HOSTNAME=7775c5bcfb54
+NAME=Priyanka
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker run --env-file env.list ubuntu env | grep ORG
+ORG=Opstree
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker run --env-file env.list ubuntu env | grep TASK
+TASK=Docker
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker run --env-file env.list ubuntu env | grep TEAM
+TEAM=Bootcamp
+priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ 
+
+
+
+#Set container default login directory to webroot
+
+docker run -it -w /webroot nginx /bin/bash
+root@fca4e004a4b8:/webroot# ls
