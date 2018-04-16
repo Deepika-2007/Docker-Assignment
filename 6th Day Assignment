@@ -48,7 +48,6 @@ services:
     - MYSQL_PASSWORD=secret
   ports:
     - "33061:3306"
-services:
  web:
   image: nginx
   ports:
@@ -57,8 +56,20 @@ services:
 
 
 
-root@priyanka-HP-EliteBook-Folio-9470m:~/nginx# docker-compose up -d
-Starting mysql ... done
+docker-compose up -d
+
+nginx_web_1 is up-to-date
+Creating mysql ... done
+
+root@priyanka-HP-EliteBook-Folio-9470m:~/nginx# docker-compose ps
+   Name                 Command             State            Ports         
+---------------------------------------------------------------------------
+mysql         docker-entrypoint.sh mysqld   Up      0.0.0.0:33061->3306/tcp
+nginx_web_1   nginx -g daemon off;          Up      0.0.0.0:8090->80/tcp  
+
+docker ps
+
+
 
  
 root@priyanka-HP-EliteBook-Folio-9470m:~/nginx# docker exec -it d99989e335c3 /bin/bash
