@@ -62,11 +62,7 @@ Starting mysql ... done
 
  
 root@priyanka-HP-EliteBook-Folio-9470m:~/nginx# docker exec -it d99989e335c3 /bin/bash
-root@d99989e335c3:/# ls
-bin   docker-entrypoint-initdb.d  home	 media	proc  sbin  tmp
-boot  entrypoint.sh		  lib	 mnt	root  srv   usr
-dev   etc			  lib64  opt	run   sys   var
-root@d99989e335c3:/# 
+ 
 root@d99989e335c3:/# 
 root@d99989e335c3:/# mysql -u root -p homestead
 Enter password: 
