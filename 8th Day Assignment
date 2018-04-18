@@ -23,21 +23,37 @@ docker node ls
 node inspect nqomcb4gdwii7zr5e2e8xfzic ( worker node inspect)
 
 
-docker service create --replicas 3 -p 8007:80 --name tomcat tomcat
-
-docker service ls
+docker service create --name tomcat tomcat
+ncngwu61tqlux9t770ip6r8ay
+overall progress: 1 out of 1 tasks 
+1/1: running   [==================================================>] 
+verify: Service converged 
+root@priyanka-HP-EliteBook-Folio-9470m:~# docker service ls
 ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-ya9p9i3hpic6        tomcat              replicated          3/3                 tomcat:latest       *:8007->80/tcp
+ncngwu61tqlu        tomcat              replicated          1/1                 tomcat:latest       
 
 
-docker service ps ya9p9i3hpic6
+docker service scale ncngwu61tqlu=5
 
-ID                  NAME                IMAGE               NODE                                DESIRED STATE       CURRENT STATE               ERROR               PORTS
-vqvapjzp5wr5        tomcat.1            tomcat:latest       worker2                             Running             Running about an hour ago                       
-uqq9bl7ew33i        tomcat.2            tomcat:latest       priyanka-HP-EliteBook-Folio-9470m   Running             Running about an hour ago                       
-v1zqktn9x5n9        tomcat.3            tomcat:latest       worker1                             Running             Running about an hour ago                       
+ncngwu61tqlu scaled to 5
+overall progress: 5 out of 5 tasks 
+1/5: running   [==================================================>] 
+2/5: running   [==================================================>] 
+3/5: running   [==================================================>] 
+4/5: running   [==================================================>] 
+5/5: running   [==================================================>] 
+verify: Service converged 
 
-root@priyanka-HP-EliteBook-Folio-9470m:~# 
+root@priyanka-HP-EliteBook-Folio-9470m:~# docker service ps ncngwu61tqlu
+ID                  NAME                IMAGE               NODE                                DESIRED STATE       CURRENT STATE            ERROR               PORTS
+rshmzid15p6l        tomcat.1            tomcat:latest       priyanka-HP-EliteBook-Folio-9470m   Running             Running 3 minutes ago                        
+hnch5jvxpzn1        tomcat.2            tomcat:latest       worker1                             Running             Running 25 seconds ago                       
+0xvvd2iu9te1        tomcat.3            tomcat:latest       worker2                             Running             Running 29 seconds ago                       
+pyrp949hstvd        tomcat.4            tomcat:latest       worker2                             Running             Running 28 seconds ago                       
+kjyzxw5zye0y        tomcat.5            tomcat:latest       priyanka-HP-EliteBook-Folio-9470m   Running             Running 27 seconds ago                       
+
+
+docker service rm service-id
 
 
 
