@@ -1,0 +1,44 @@
+
+
+
+    # Create a docker swarm cluster
+        Keep base machine as swarm leader
+        Spin up 2 vagrants (if machine supports) and configure them as worker nodes
+
+    Update docker swarm cluster
+        Inspect the leader and worker nodes
+        Remove a worker node from the cluster
+        Add a worker node back into the cluster
+
+    Deploy a tomcat service onto the cluster
+        Run 1 container of tomcat
+        Scale tomcat service to 3 containers
+        Inspect running service
+        Remove tomcat service.
+
+
+
+docker node inspect self  ( leader node inspect)
+docker node ls
+node inspect nqomcb4gdwii7zr5e2e8xfzic ( worker node inspect)
+
+
+docker service create --replicas 3 -p 8007:80 --name tomcat tomcat
+
+docker service ls
+ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+ya9p9i3hpic6        tomcat              replicated          3/3                 tomcat:latest       *:8007->80/tcp
+
+
+docker service ps ya9p9i3hpic6
+
+ID                  NAME                IMAGE               NODE                                DESIRED STATE       CURRENT STATE               ERROR               PORTS
+vqvapjzp5wr5        tomcat.1            tomcat:latest       worker2                             Running             Running about an hour ago                       
+uqq9bl7ew33i        tomcat.2            tomcat:latest       priyanka-HP-EliteBook-Folio-9470m   Running             Running about an hour ago                       
+v1zqktn9x5n9        tomcat.3            tomcat:latest       worker1                             Running             Running about an hour ago                       
+
+root@priyanka-HP-EliteBook-Folio-9470m:~# 
+
+
+
+
