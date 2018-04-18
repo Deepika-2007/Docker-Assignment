@@ -80,6 +80,12 @@ TASK=Docker
 priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ docker run --env-file env.list ubuntu env | grep TEAM
 TEAM=Bootcamp
 priyanka@priyanka-HP-EliteBook-Folio-9470m:~$ 
+                                 
+                                 Or
+                                 
+docker run -d -it --memory=400M --memory-reservation=200M --cpu-shares=200 --env-file=main.env -h nginx.example.com --name=nginx06 nginx
+
+docker inspect container Id | grep Env
 
 
 
