@@ -30,39 +30,44 @@
     
     
     
-    root@priyanka-HP-EliteBook-Folio-9470m:~/wordpress# ls
-docker-compose.yml
+ root@priyanka-HP-EliteBook-Folio-9470m:~# cd wordpress/
 root@priyanka-HP-EliteBook-Folio-9470m:~/wordpress# cat docker-compose.yml 
 version: "2"
 volumes:
-  mysql_data:
+ wordpress_data:
 services:
-  wordpress:
-    image: wordpress:latest
-    ports:
-      - "8000:80"
-    restart: always
-    environment:
-      - wordpress_db_host=db
-      - wordpress_db_password=priyanka
-      - wordpress_data=data
-    depends_on:
-      - db 
-  db:
-    image: mysql:5.7
-    volumes:
-     - mysql_data:/var/lib/mysql
-    restart: always
-    environment:
-     - MYSQL_ROOT_PASSWORD=secret
-     - MYSQL_DATABASE=homestead
-     - MYSQL_USER=root
-     - MYSQL_PASSWORD=secret
+ wordpress:
+   image: wordpress:latest
+   ports:
+     - "8001:80"
+   restart: always
+   environment:
+     - wordpress_db_host=db:3306
+     - wordpress_db_password=priyanka
+     
+   depends_on:
+     - db
+ db:
+   image: mysql:5.7
+   volumes:
+     - wordpress_data:/var/lib/mysql
+   restart: always
+   environment:
+     - MYSQL_ROOT_PASSWORD=priyanka
+     - MYSQL_DATABASE=wordpress
+     - MYSQL_USER=priyanka
+     - MYSQL_PASSWORD=priyanka
+   ports:
+     - "3307:3306"
+root@priyanka-HP-EliteBook-Folio-9470m:~/wordpress# 
+
+
 
  docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
 8742f518af12        wordpress:latest    "docker-entrypoint.s…"   2 hours ago         Up 32 minutes       0.0.0.0:8000->80/tcp   wordpress_wordpress_1
 78be487a6d10        mysql:5.7           "docker-entrypoint.s…"   2 hours ago         Up 32 minutes       3306/tcp               wordpress_db_1
+
 
 
    
