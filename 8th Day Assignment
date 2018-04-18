@@ -17,11 +17,29 @@
         Remove tomcat service.
 
 
-
+_______________________________________________________________________________________________________________
 docker node inspect self  ( leader node inspect)
-docker node ls
-node inspect nqomcb4gdwii7zr5e2e8xfzic ( worker node inspect)
 
+docker node ls
+docker node inspect nqomcb4gdwii7zr5e2e8xfzic ( worker node inspect)
+
+
+docker node ls
+
+ID                            HOSTNAME                            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
+s1xodczd3u184pxbr99t1zfpr *   priyanka-HP-EliteBook-Folio-9470m   Ready               Active              Leader              18.03.0-ce
+nqomcb4gdwii7zr5e2e8xfzic     worker1                             Ready               Active                                  18.03.0-ce
+yv13sn85nsq1gl345x9vmc555     worker2                             Ready               Active                                  18.04.0-ce
+
+root@priyanka-HP-EliteBook-Folio-9470m:~# docker node rm --force nqomcb4gdwii7zr5e2e8xfzic
+nqomcb4gdwii7zr5e2e8xfzic
+
+root@priyanka-HP-EliteBook-Folio-9470m:~# docker node ls
+ID                            HOSTNAME                            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
+s1xodczd3u184pxbr99t1zfpr *   priyanka-HP-EliteBook-Folio-9470m   Ready               Active              Leader              18.03.0-ce
+yv13sn85nsq1gl345x9vmc555     worker2                             Ready               Active                                  18.04.0-ce
+
+________________________________________________________________________________________________________________________________--
 
 docker service create --name tomcat tomcat
 ncngwu61tqlux9t770ip6r8ay
