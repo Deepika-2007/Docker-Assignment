@@ -1,0 +1,98 @@
+
+
+### Assignment
+
+    Use docker compose file to create a stack over swarm
+        Deploy a wordpress service (service_name: wordpress)
+        Deploy database service to serve wordpress (service_name: db)
+        Restrict service resource utilization
+            Wordpress : CPU=0.25 Mem=256M
+            Database : CPU=0.50 Mem=512M
+        Setup environment variables for database service
+            MYSQL_ROOT_PASSWORD: wordpress
+            MYSQL_DATABASE: wordpress
+            MYSQL_USER: wordpress
+            MYSQL_PASSWORD: wordpress
+        Setup environment variables for wordpress service
+            WORDPRESS_DB_HOST: db:3306
+            WORDPRESS_DB_USER: wordpress
+            WORDPRESS_DB_PASSWORD: wordpress
+        Define deploy scale policies for wordpress service
+            replicas: 3
+        Deploy the stack and inspect the services
+        Remove the running service
+
+    Destroy the docker swarm stack
+    
+    
+   ****************************************************************************************************************************************
+
+root@priyanka-HP-EliteBook-Folio-9470m:~/wordpress_db_stack# cat docker-compose.yml 
+version: "3"
+services:
+  wordpress:
+    image: wordpress:latest
+    ports: 
+      - "8009:80"
+    deploy:
+      replicas: 3
+      resources: 
+        limits:
+          cpus: "0.25"
+          memory: 256M
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress 
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    deploy:   
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+  
+
+
+docker stack deploy --compose-file docker-compose.yml priyanka
+
+Ignoring unsupported options: restart
+
+Creating network priyanka_default
+Creating service priyanka_wordpress
+Creating service priyanka_db
+
+root@priyanka-HP-EliteBook-Folio-9470m:~/wordpress_db_stack# docker service ls
+ID                  NAME                 MODE                REPLICAS            IMAGE               PORTS
+bfofjtoss9hi        priyanka_db          replicated          1/1                 mysql:5.7           
+rpoobcjg149x        priyanka_wordpress   replicated          1/3                 wordpress:latest    *:8009->80/tcp
+
+root@priyanka-HP-EliteBook-Folio-9470m:~/wordpress_db_stack# docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS               NAMES
+eb56113d5906        wordpress:latest    "docker-entrypoint.s…"   About a minute ago   Up About a minute   80/tcp              priyanka_wordpress.1.kfi3pvk6ddzlylneesg5iafam
+28ce9e3f7d9b        mysql:5.7           "docker-entrypoint.s…"   2 minutes ago        Up About a minute   3306/tcp            priyanka_db.1.kb9t2b56q2l52xgk5ck8c4v5x
+73046d841449        tomcat              "/bin/bash"              4 hours ago          Up 4 hours          8080/tcp            competent_vaughan
+
+root@priyanka-HP-EliteBook-Folio-9470m:~/wordpress_db_stack# docker service ps rpoobcjg149x
+ID                  NAME                       IMAGE               NODE                                DESIRED STATE       CURRENT STATE             ERROR                       PORTS
+kfi3pvk6ddzl        priyanka_wordpress.1       wordpress:latest    priyanka-HP-EliteBook-Folio-9470m   Running             Running 2 minutes ago                                 
+sb2nf53liebl         \_ priyanka_wordpress.1   wordpress:latest    priyanka-HP-EliteBook-Folio-9470m   Shutdown            Failed 2 minutes ago      "task: non-zero exit (1)"   
+87v2wmin6zch        priyanka_wordpress.2       wordpress:latest    worker2                             Running             Preparing 3 minutes ago                               
+l04z32f5xti4        priyanka_wordpress.3       wordpress:latest    worker1                             Running             Preparing 3 minutes ago                               
+
+root@priyanka-HP-EliteBook-Folio-9470m:~/wordpress_db_stack# docker service ps bfofjtoss9hi
+ID                  NAME                IMAGE               NODE                                DESIRED STATE       CURRENT STATE           ERROR               PORTS
+kb9t2b56q2l5        priyanka_db.1       mysql:5.7           priyanka-HP-EliteBook-Folio-9470m   Running             Running 3 minutes ago                       
+
+
+
+
