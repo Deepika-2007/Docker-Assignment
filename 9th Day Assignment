@@ -93,6 +93,16 @@ root@priyanka-HP-EliteBook-Folio-9470m:~/wordpress_db_stack# docker service ps b
 ID                  NAME                IMAGE               NODE                                DESIRED STATE       CURRENT STATE           ERROR               PORTS
 kb9t2b56q2l5        priyanka_db.1       mysql:5.7           priyanka-HP-EliteBook-Folio-9470m   Running             Running 3 minutes ago                       
 
+For replicas wordpress inspect :
+
+docker inspect kfi3pvk6ddzl
+docker inspect 87v2wmin6zch
+docker inspect l04z32f5xti4
+
+For db inspect :
+
+docker inspect kb9t2b56q2l5
+
 
 
 
