@@ -104,5 +104,22 @@ For db inspect :
 docker inspect kb9t2b56q2l5
 
 
+docker stack rm priyanka
+
+Removing service priyanka_db
+Removing service priyanka_wordpress
+Removing network priyanka_default
+
+root@priyanka-HP-EliteBook-Folio-9470m:~/wordpress_db_stack# docker service ls
+ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+root@priyanka-HP-EliteBook-Folio-9470m:~/wordpress_db_stack# 
+
+
+
+
+
+
+
+
 
 
